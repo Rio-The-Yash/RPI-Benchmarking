@@ -40,7 +40,7 @@ MODEL_NAME = os.environ.get("BENCHMARK_MODEL_NAME", "Vinci-Piccolo-1.0-GGUF")
 MODEL_REPO = os.environ.get("BENCHMARK_MODEL_REPO", "simpledirect/Vinci-Piccolo-1.0-GGUF")
 QUANTIZATION = os.environ.get("BENCHMARK_QUANTIZATION", "Q4_K_M")
 MODEL_STARTUP_TIME = os.environ.get("MODEL_STARTUP_TIME")
-MAX_TOKENS = 2048
+MAX_TOKENS = 512
 
 # Keep the original prompt first in each profile for comparison with older runs.
 EXTRA_PROMPTS = {

@@ -1,0 +1,287 @@
+timestamp_utc,model,model_repo,quantization,model_startup_time_s,iteration,prompt_id,profile,thinking,prompt,status,completed,truncated,error,ttft_ms,tpot_ms,observed_inter_chunk_ms,prompt_tokens,output_tokens,prompt_tps,output_tps,total_request_time_s,telemetry_samples,ram_start_mb,ram_avg_mb,ram_peak_mb,swap_peak_mb,cpu_avg_percent,cpu_peak_avg_percent,cpu_peak_core_percent,gpu_avg_percent,gpu_peak_percent,cpu_temp_start_c,cpu_temp_peak_c,gpu_temp_start_c,gpu_temp_peak_c,power_avg_w,power_peak_w,estimated_energy_j
+2026-10-26T16:56:15.859623+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,1,1,Thinking - General,True,"A country currently generates 70 percent of its
+electricity from coal and natural gas and wants to
+reach 90 percent renewable electricity within 15 years.
+Develop a detailed transition strategy. Compare solar,
+wind, hydroelectric, geothermal, nuclear, battery
+storage, pumped hydro, and demand-response
+technologies. Analyze technical feasibility, grid
+stability, transmission requirements, seasonal energy
+storage, land use, supply-chain constraints, workforce
+requirements, capital costs, operating costs, energy
+security, and environmental impacts. Identify the major
+trade-offs and failure modes. Then propose a phased
+15-year implementation plan with measurable milestones.
+Explain the reasoning behind your recommendations in
+detail.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.003,2,3212.250,3211.992,3212.250,0.000,0.125,0.250,1.000,,,54.300,54.300,,,,,
+2026-10-26T16:56:17.063295+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,2,2,Thinking - General,True,"Design a comprehensive strategy for a rapidly growing
+city of five million people that expects its population
+to increase by 40 percent over the next twenty years.
+The city already faces traffic congestion, housing
+shortages, aging water systems, electricity demand
+growth, air pollution, and limited public funds.
+Develop an integrated plan covering transportation,
+housing, water, electricity, waste management, public
+health, climate resilience, and digital infrastructure.
+For each area, analyze competing priorities,
+dependencies, risks, costs, and possible unintended
+consequences. Explain how the city should sequence
+investments over twenty years and how success should be
+measured.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3209.797,3208.500,3209.797,0.000,0.125,0.250,1.000,,,53.800,54.900,,,,,
+2026-10-26T16:56:18.266330+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,3,3,Thinking - General,True,"A manufacturing company operates twelve factories
+across multiple countries and wants to reduce its total
+carbon emissions by 80 percent while keeping production
+costs competitive. Build a detailed decision framework
+for achieving this target. Consider renewable
+electricity, electrification of industrial processes,
+energy efficiency, alternative fuels, supply-chain
+changes, transportation, carbon capture, equipment
+replacement cycles, and carbon offsets. Discuss
+financial, technical, regulatory, operational, and
+supply-chain risks. Compare short-term and long-term
+strategies and propose a prioritized implementation
+roadmap with clear reasoning.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3207.203,3206.609,3207.203,0.000,0.375,0.750,1.000,,,54.900,54.900,,,,,
+2026-10-26T16:56:19.469804+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,4,4,Thinking - General,True,"Imagine that a region experiences a severe five-year
+drought while its population and agricultural demand
+continue to grow. Develop a detailed water-security
+strategy that balances urban consumption, agriculture,
+industry, ecosystem protection, and future population
+growth. Evaluate desalination, wastewater recycling,
+groundwater extraction, reservoirs, conservation, smart
+metering, agricultural efficiency, water pricing, and
+inter-regional transfers. Analyze economic,
+environmental, technical, political, and social
+trade-offs. Construct a phased response for immediate
+emergency measures, medium-term stabilization, and
+long-term resilience.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3206.016,3204.695,3206.016,0.000,0.000,0.000,0.000,,,53.200,54.300,,,,,
+2026-10-26T16:56:20.672903+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,5,5,Thinking - General,True,"A national government wants to build a resilient
+digital infrastructure strategy for the next fifteen
+years. It must support cloud computing, artificial
+intelligence, healthcare, banking, government services,
+education, and emergency communications while remaining
+resilient to cyberattacks, natural disasters,
+supply-chain disruptions, and power failures. Develop a
+detailed architecture and policy strategy. Compare
+centralized and distributed infrastructure, public
+cloud, sovereign cloud, edge computing, local data
+centers, backup power, network redundancy,
+cybersecurity controls, and disaster recovery. Identify
+trade-offs and propose measurable resilience targets.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3203.359,3202.797,3203.359,0.000,0.000,0.000,0.000,,,54.300,54.300,,,,,
+2026-10-26T16:56:21.875932+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,6,6,Thinking - General,True,"Analyze how a country should prepare its economy and
+workforce for widespread adoption of artificial
+intelligence and automation over the next twenty years.
+Consider productivity, job displacement, creation of
+new occupations, education, reskilling, inequality,
+taxation, social programs, small businesses, research
+investment, cybersecurity, energy demand, and
+international competitiveness. Present multiple
+plausible future scenarios rather than assuming a
+single outcome. For each scenario, identify major
+risks, leading indicators, and policy responses. Finish
+with a staged strategy that can adapt as conditions
+change.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3196.656,3195.516,3196.656,0.000,0.000,0.000,0.000,,,53.800,53.800,,,,,
+2026-10-26T16:56:23.079092+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,7,1,Thinking - Precise Coding,True,"Design and implement in TypeScript an O(n) algorithm
+that accepts an unsorted array of integers and returns:
+the length of the longest consecutive sequence, the
+sequence itself, and the starting and ending values.
+Duplicate values may appear and must not affect the
+result. If multiple sequences have the same maximum
+length, return the one with the smallest starting
+value. Do not sort the input. Explain the algorithm,
+prove why its expected time complexity is O(n), analyze
+space complexity, discuss edge cases, and provide clean
+production-quality TypeScript code followed by at least
+eight meaningful test cases.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3194.375,3193.578,3194.375,0.000,0.125,0.250,1.000,,,53.800,54.900,,,,,
+2026-10-26T16:56:24.282166+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,8,2,Thinking - Precise Coding,True,"Design a production-quality TypeScript implementation
+of an LRU cache with O(1) average-time get and put
+operations. Do not use JavaScript Map insertion order
+as the eviction mechanism. Implement the required
+hash-map and doubly-linked-list logic explicitly.
+Support updating existing keys, capacity one, arbitrary
+string keys, and generic values. Explain every major
+design decision, identify invariants that must remain
+true, analyze time and space complexity, discuss common
+implementation bugs, and provide a comprehensive test
+suite covering eviction, updates, repeated access, and
+edge cases.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3192.781,3192.570,3192.781,0.000,0.000,0.000,0.000,,,54.900,54.900,,,,,
+2026-10-26T16:56:25.485358+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,9,3,Thinking - Precise Coding,True,"You are designing a task scheduler in TypeScript. Each
+task has an ID, execution duration, and zero or more
+dependency IDs. Design an algorithm that validates the
+dependency graph, detects cycles, produces a valid
+execution order when possible, and calculates the
+earliest possible completion time assuming an unlimited
+number of workers and that a task can start only after
+all dependencies finish. Explain the graph
+representation, cycle-detection method, topological
+ordering, dynamic-programming step, complexity, and
+failure cases. Then provide complete TypeScript code
+and a set of nontrivial tests.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3192.359,3191.258,3192.359,0.000,0.125,0.250,1.000,,,53.800,53.800,,,,,
+2026-10-26T16:56:26.688703+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,10,4,Thinking - Precise Coding,True,"Design a thread-safe job-processing architecture for a
+service that receives up to 50,000 jobs per minute.
+Jobs may be retried, workers may crash, duplicate
+messages may be delivered, and jobs must never be
+considered successfully completed more than once from
+the application's perspective. Explain how you would
+implement idempotency, retries with exponential
+backoff, dead-letter handling, leases or visibility
+timeouts, concurrency control, database transactions,
+observability, graceful shutdown, and recovery after
+failure. Then provide detailed TypeScript pseudocode or
+implementation-level code for the core worker loop and
+explain race conditions that must be prevented.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3190.156,3188.883,3190.156,0.000,0.125,0.250,1.000,,,53.200,54.900,,,,,
+2026-10-26T16:56:27.891876+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,11,5,Thinking - Precise Coding,True,"Implement in TypeScript a function that receives
+millions of time intervals represented as start and end
+integer timestamps and returns the merged
+non-overlapping intervals, total covered duration,
+largest uncovered gap between the minimum and maximum
+timestamps, and maximum number of simultaneously active
+intervals. Clearly define how touching intervals and
+zero-length intervals are handled. Develop an efficient
+algorithm, analyze its time and space complexity,
+explain alternative approaches for very large datasets
+that do not fit into memory, and provide
+production-quality code with extensive edge-case tests.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3185.000,3185.297,3185.594,0.000,0.000,0.000,0.000,,,54.300,54.300,,,,,
+2026-10-26T16:56:29.095080+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,12,6,Thinking - Precise Coding,True,"A Node.js API has gradually become slow under load.
+Requests perform authentication, query PostgreSQL, call
+two external services, transform large JSON objects,
+and publish an event. At 50 requests per second latency
+is 120 ms, but at 500 requests per second p95 latency
+exceeds 8 seconds and memory continually increases.
+Develop a systematic debugging and optimization plan.
+Reason about event-loop blocking, connection pools,
+unbounded concurrency, memory leaks, garbage
+collection, database indexes, N+1 queries, HTTP
+connection reuse, timeouts, retries, queues, caching,
+backpressure, and instrumentation. Include concrete
+TypeScript/Node.js examples showing how you would
+restructure the most likely bottlenecks.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3185.609,3184.375,3185.609,0.000,1.000,2.000,4.000,,,54.300,54.300,,,,,
+2026-10-26T16:56:30.298311+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,13,1,Instruct - General,False,"Write a detailed educational guide explaining how
+modern electrical power grids work for a reader with no
+engineering background. Cover electricity generation,
+transformers, high-voltage transmission, substations,
+distribution networks, frequency and voltage control,
+supply-demand balancing, grid operators,
+renewable-energy integration, battery storage,
+blackouts, and grid restoration. Organize the answer
+with clear headings, use practical examples and
+analogies, define technical terms when first
+introduced, and finish with a concise summary of the
+entire electricity journey from power plant to
+household.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3183.141,3183.070,3183.141,0.000,0.125,0.250,1.000,,,54.300,54.300,,,,,
+2026-10-26T16:56:31.501514+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,14,2,Instruct - General,False,"Create a comprehensive beginner-friendly explanation of
+how a web application works from the moment a user
+enters a URL until the requested page appears. Explain
+DNS, IP addresses, TCP, TLS, HTTP, browsers, CDNs, load
+balancers, reverse proxies, web servers, APIs,
+application servers, databases, caches, cookies,
+authentication, JavaScript execution, rendering, and
+browser storage. Follow the request chronologically and
+clearly explain which component is responsible for each
+stage. Include a realistic example involving a user
+signing into an online store.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3183.000,3182.531,3183.000,0.000,0.125,0.250,1.000,,,53.800,54.300,,,,,
+2026-10-26T16:56:32.704672+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,15,3,Instruct - General,False,"Write a structured technical guide comparing relational
+databases and document databases. Explain schemas,
+tables, documents, relationships, normalization,
+denormalization, indexes, transactions, ACID
+properties, consistency, horizontal and vertical
+scaling, replication, sharding, query patterns, data
+integrity, and operational complexity. Use PostgreSQL
+and MongoDB as concrete examples without presenting
+either as universally superior. Include several
+application scenarios and explain which characteristics
+should influence the database choice in each scenario.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3182.062,3180.594,3182.062,0.000,0.125,0.250,1.000,,,54.300,54.300,,,,,
+2026-10-26T16:56:33.908103+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,16,4,Instruct - General,False,"Explain the complete machine-learning lifecycle to a
+software developer who understands programming but has
+never built a machine-learning system. Cover problem
+definition, data collection, cleaning, labeling,
+exploratory analysis, feature engineering, training and
+validation splits, model selection, training,
+overfitting, underfitting, evaluation metrics,
+deployment, inference, monitoring, drift, retraining,
+versioning, privacy, and reproducibility. Use one
+consistent practical example throughout the explanation
+and clearly distinguish training from inference.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3178.062,3177.398,3178.062,0.000,0.000,0.000,0.000,,,54.300,54.300,,,,,
+2026-10-26T16:56:35.111402+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,17,5,Instruct - General,False,"Prepare a detailed incident-response guide for a
+software team operating a high-traffic web service.
+Explain detection, alert triage, severity
+classification, incident command, communication,
+diagnosis, mitigation, rollback, feature flags, logs,
+metrics, distributed traces, dashboards, database
+investigation, external dependency failures, customer
+communication, recovery validation, post-incident
+review, and preventive actions. Include a realistic
+example where an API deployment causes elevated error
+rates and database load. Keep the guide practical and
+operational.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3177.703,3177.070,3177.703,0.000,0.125,0.250,1.000,,,54.300,54.300,,,,,
+2026-10-26T16:56:36.314764+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,18,6,Instruct - General,False,"Write a comprehensive explanation of containerization
+and modern application deployment. Begin with the
+problems containers solve and explain images,
+containers, registries, Dockerfiles, layers, volumes,
+networking, environment variables, secrets, resource
+limits, health checks, and logging. Then explain how
+container orchestration systems schedule and manage
+applications, including replicas, rolling deployments,
+service discovery, autoscaling, failure recovery, and
+persistent storage. Finish by walking through a
+realistic deployment of a frontend, API, and database.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3177.406,3176.578,3177.406,0.000,0.250,0.500,1.000,,,53.800,53.800,,,,,
+2026-10-26T16:56:37.518206+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,19,1,Instruct - Reasoning,False,"A company operates three factories A, B, and C. Factory
+A can produce 1,200 units per day at $18 per unit, B
+can produce 900 units per day at $21 per unit, and C
+can produce 1,500 units per day at $16 per unit. Daily
+demand is 3,000 units. However, at least 600 units must
+come from B because of a contract, C can operate at no
+more than 80 percent capacity because of maintenance,
+and using more than 1,000 units from A adds an overtime
+cost of $5 for every A unit above 1,000. Determine a
+lowest-cost feasible production allocation. Show the
+calculations, verify every constraint, calculate total
+cost, and explain why shifting production among
+factories would or would not reduce the cost.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3175.750,3175.039,3175.750,0.000,0.000,0.000,0.000,,,53.200,54.300,,,,,
+2026-10-26T16:56:38.721688+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,20,2,Instruct - Reasoning,False,"A company must schedule six projects A through F. Their
+durations in days are A=4, B=7, C=3, D=6, E=5, and F=2.
+B and C can begin only after A finishes. D requires B.
+E requires both B and C. F requires both D and E.
+Assume unlimited workers, but no project can begin
+before all of its dependencies are complete. Determine
+the earliest start and finish time for every project,
+identify the critical path, calculate the minimum total
+completion time, and then determine what changes if B
+takes three additional days. Show the reasoning step by
+step.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3174.328,3174.852,3175.375,0.000,0.250,0.500,1.000,,,54.300,54.300,,,,,
+2026-10-26T16:56:39.925091+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,21,3,Instruct - Reasoning,False,"An online retailer sells a product for $480. The
+retailer first applies a 15 percent promotional
+discount. A customer then uses a coupon worth 10
+percent of the already-discounted price. Shipping costs
+$24 unless the price after both discounts is at least
+$375, in which case shipping is free. Finally, 13
+percent sales tax is applied to the merchandise price
+after discounts plus any shipping charge. The
+retailer's original cost for the product is $260 and it
+pays the shipping charge itself when shipping is free.
+Calculate the customer's final payment, the retailer's
+gross profit before other expenses, and the effective
+percentage discount relative to the original $480
+sticker price. Show every calculation and explain the
+order of operations.",error,False,False,"HTTP 400: {""error"":{""message"":""model is required"",""type"":""invalid_request_error"",""param"":null,""code"":null}}
+",,,,,,,,0.002,2,3172.453,3171.461,3172.453,0.000,0.125,0.250,1.000,,,54.300,54.300,,,,,
+,,,,,,,TOTAL PROMPT TIME,,,,,,,,,,,,,,0.036,,,,,,,,,,,,,,,,,

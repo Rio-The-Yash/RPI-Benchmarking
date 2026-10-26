@@ -1,0 +1,17 @@
+timestamp_utc,model,model_repo,quantization,model_startup_time_s,iteration,prompt_id,profile,thinking,prompt,status,completed,truncated,error,ttft_ms,tpot_ms,observed_inter_chunk_ms,prompt_tokens,output_tokens,prompt_tps,output_tps,total_request_time_s,telemetry_samples,ram_start_mb,ram_avg_mb,ram_peak_mb,swap_peak_mb,cpu_avg_percent,cpu_peak_avg_percent,cpu_peak_core_percent,gpu_avg_percent,gpu_peak_percent,cpu_temp_start_c,cpu_temp_peak_c,gpu_temp_start_c,gpu_temp_peak_c,power_avg_w,power_peak_w,estimated_energy_j,cpu_freq_avg_mhz,cpu_freq_peak_mhz,throttle_flags_peak,throttle_occurred
+2026-10-26T18:07:28.547327+00:00,qwen3:1.7b,ollama/qwen3:1.7b,unknown,,1,1,Thinking - General,True,"A country currently generates 70 percent of its
+electricity from coal and natural gas and wants to
+reach 90 percent renewable electricity within 15 years.
+Develop a detailed transition strategy. Compare solar,
+wind, hydroelectric, geothermal, nuclear, battery
+storage, pumped hydro, and demand-response
+technologies. Analyze technical feasibility, grid
+stability, transmission requirements, seasonal energy
+storage, land use, supply-chain constraints, workforce
+requirements, capital costs, operating costs, energy
+security, and environmental impacts. Identify the major
+trade-offs and failure modes. Then propose a phased
+15-year implementation plan with measurable milestones.
+Explain the reasoning behind your recommendations in
+detail.",truncated,True,True,,2028.691,148.804,149.066,142,2048,78.396,6.720,306.570,308,3269.922,3165.892,3273.094,0.000,99.281,100.000,100.000,,,55.400,76.300,,,8.953,12.723,2744.624,2800.032,2800.044,0,False
+,,,,,,,TOTAL PROMPT TIME,,,,,,,,,,,,,,306.570,,,,,,,,,,,,,,,,,,,,,

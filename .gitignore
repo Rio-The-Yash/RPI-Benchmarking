@@ -1,0 +1,8 @@
+models/
+__pycache__/
+*.gguf
+*.log
+*.tar.gz
+*.b64
+*_raw_session.txt
+*_responses.json
