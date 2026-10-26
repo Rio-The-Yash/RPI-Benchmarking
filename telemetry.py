@@ -1,8 +1,8 @@
 """
 Raspberry Pi 5 telemetry for the SimpleDirect benchmark.
 
-Drop-in replacement for the macOS telemetry module: same public functions,
-so benchmark.py needs no import changes.
+Drop-in replacement for the macOS telemetry module: same public functions, so
+benchmark.py needs no import changes.
 
     collect_telemetry(stop_event)
     start_temperature_monitor() / stop_temperature_monitor()
@@ -11,12 +11,14 @@ so benchmark.py needs no import changes.
 Sources on Raspberry Pi OS:
     psutil                  -> RAM, swap, CPU utilisation
     vcgencmd measure_temp   -> SoC temperature (CPU and GPU share one sensor)
-    vcgencmd measure_clock  -> ARM CPU clock
-    vcgencmd pmic_read_adc  -> 5V input voltage/current (Pi 5 PMIC)
+    vcgencmd measure_clock  -> ARM CPU clock (MHz)
+    vcgencmd pmic_read_adc  -> per-rail voltage and current
     vcgencmd get_throttled  -> undervoltage / thermal throttle flags
 
-No discrete GPU and no powermetrics/macmon equivalent, so gpu_* keys are
-None and the GPU columns in the CSV stay empty.
+Power is the sum of V x I over every PMIC rail exposing both values. It
+excludes USB, fan and 5V-direct loads, so it understates true board draw by
+roughly 10-20 percent. There is no GPU sensor and no powermetrics equivalent,
+so gpu_* keys stay None.
 """
 
 import math
@@ -146,7 +148,14 @@ def get_throttle_metrics():
 
 
 def get_power_metrics():
-    """Sum of PMIC rail power. Excludes USB and 5V-direct loads."""
+    """Sum of V x I across PMIC rails that expose both a volt and an amp.
+
+    pmic_read_adc prints one line per measurement:
+        VDD_CORE_A current(7)=1.01802000A
+        VDD_CORE_V volt(15)=0.99953500V
+    The 5V input rail reports voltage only, so input power cannot be derived
+    from it. Rail power excludes USB, fan and 5V-direct loads.
+    """
     output = _vcgencmd("pmic_read_adc")
     if not output:
         return {}
@@ -154,22 +163,29 @@ def get_power_metrics():
     amps = {
         name: float(value)
         for name, value in re.findall(
-            r"([A-Z0-9_]+)_A current\(\d+\)=([\d.]+)A", output
+            r"([A-Z0-9_]+)_A current\(\d+\)=([\d.]+)A",
+            output,
         )
     }
+
     volts = {
         name: float(value)
         for name, value in re.findall(
-            r"([A-Z0-9_]+)_V volt\(\d+\)=([\d.]+)V", output
+            r"([A-Z0-9_]+)_V volt\(\d+\)=([\d.]+)V",
+            output,
         )
     }
 
-    total = sum(volts[rail] * amps[rail] for rail in amps if rail in volts)
+    total_watts = sum(
+        volts[rail] * amps[rail]
+        for rail in amps
+        if rail in volts
+    )
 
-    if not total:
+    if not total_watts:
         return {}
 
-    return {"power_current_mw": total * 1000.0}
+    return {"power_current_mw": total_watts * 1000.0}
 
 
 _stop_event = threading.Event()

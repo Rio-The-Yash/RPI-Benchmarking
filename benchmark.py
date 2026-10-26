@@ -20,13 +20,18 @@ BACKEND = os.environ.get("BENCHMARK_BACKEND", "llamacpp").lower()
 
 DEFAULT_URLS = {
     "llamacpp": "http://127.0.0.1:8080/v1/chat/completions",
-    "ollama": "http://127.0.0.1:11434/v1/chat/completions",
+    "ollama": "http://127.0.0.1:11434/api/chat",
 }
 
 SERVER_URL = os.environ.get(
     "BENCHMARK_SERVER_URL",
     DEFAULT_URLS.get(BACKEND, DEFAULT_URLS["llamacpp"]),
 )
+
+# Accept the OpenAI-style Ollama URL from older runner scripts and redirect
+# it to the native chat endpoint, which reports real token timings.
+if BACKEND == "ollama" and SERVER_URL.endswith("/v1/chat/completions"):
+    SERVER_URL = SERVER_URL[: -len("/v1/chat/completions")] + "/api/chat"
 
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
@@ -35,7 +40,7 @@ MODEL_NAME = os.environ.get("BENCHMARK_MODEL_NAME", "Vinci-Piccolo-1.0-GGUF")
 MODEL_REPO = os.environ.get("BENCHMARK_MODEL_REPO", "simpledirect/Vinci-Piccolo-1.0-GGUF")
 QUANTIZATION = os.environ.get("BENCHMARK_QUANTIZATION", "Q4_K_M")
 MODEL_STARTUP_TIME = os.environ.get("MODEL_STARTUP_TIME")
-MAX_TOKENS = 1024
+MAX_TOKENS = 2048
 
 # Keep the original prompt first in each profile for comparison with older runs.
 EXTRA_PROMPTS = {
@@ -82,6 +87,8 @@ CSV_FIELDS = [
     "cpu_temp_start_c", "cpu_temp_peak_c", "gpu_temp_start_c",
     "gpu_temp_peak_c", "power_avg_w", "power_peak_w",
     "estimated_energy_j",
+    "cpu_freq_avg_mhz", "cpu_freq_peak_mhz",
+    "throttle_flags_peak", "throttle_occurred",
 ]
 
 
@@ -181,6 +188,9 @@ def summarize_telemetry(samples):
 
     power = values("power_current_mw")
 
+    cpu_freq = values("cpu_freq_mhz")
+    throttle_flags = values("throttled_flags")
+
     return {
         "samples": len(samples),
 
@@ -230,6 +240,19 @@ def summarize_telemetry(samples):
         "power_peak_w":
             max(power) / 1000
             if power else None,
+
+        "cpu_freq_average":
+            sum(cpu_freq) / len(cpu_freq)
+            if cpu_freq else None,
+
+        "cpu_freq_peak":
+            max(cpu_freq) if cpu_freq else None,
+
+        "throttle_flags_peak":
+            max(throttle_flags) if throttle_flags else None,
+
+        "throttle_occurred":
+            bool(max(throttle_flags)) if throttle_flags else None,
     }
 
 
@@ -638,33 +661,30 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
     # Allow one baseline telemetry sample.
     time.sleep(1.2)
 
-    payload = {
-        "messages": [
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-
-        "stream": True,
-
-        "max_tokens": MAX_TOKENS,
-
-        # Ask the server to include token usage in the final chunk.
-        "stream_options": {
-            "include_usage": True
-        },
-
-        "temperature":
-            profile["temperature"],
-
-        "top_p":
-            profile["top_p"],
-    }
-
     if BACKEND == "llamacpp":
 
-        payload.update({
+        payload = {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+
+            "stream": True,
+
+            "max_tokens": MAX_TOKENS,
+
+            "stream_options": {
+                "include_usage": True
+            },
+
+            "temperature":
+                profile["temperature"],
+
+            "top_p":
+                profile["top_p"],
+
             "top_k":
                 profile["top_k"],
 
@@ -684,15 +704,41 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
             },
 
             "reasoning_format": "deepseek"
-        })
+        }
 
     else:
 
-        # Ollama's OpenAI-compatible endpoint requires the model name in
-        # every request body and rejects llama.cpp-only sampler fields.
-        payload["model"] = MODEL_NAME
+        # Native Ollama chat endpoint: reports real token counts and
+        # durations, so throughput is measured rather than estimated.
+        payload = {
+            "model": MODEL_NAME,
 
-        payload["presence_penalty"] = profile["presence_penalty"]
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+
+            "stream": True,
+
+            # Enables or disables the reasoning trace per profile.
+            "think": profile["thinking"],
+
+            "options": {
+                "temperature":
+                    profile["temperature"],
+
+                "top_p":
+                    profile["top_p"],
+
+                "presence_penalty":
+                    profile["presence_penalty"],
+
+                "num_predict":
+                    MAX_TOKENS,
+            },
+        }
 
     print()
     print("Running benchmark...")
@@ -747,20 +793,84 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
             line = raw_line.decode("utf-8", errors="replace")
             raw_response_lines.append(line)
 
-            if not line.startswith("data: "):
-                continue
+            if BACKEND == "ollama":
 
-            data = line[6:]
+                # Ollama streams newline-delimited JSON, not SSE.
+                try:
+                    native = json.loads(line)
 
-            if data == "[DONE]":
-                completed = True
-                break
+                except json.JSONDecodeError:
+                    continue
 
-            try:
-                chunk = json.loads(data)
+                message_field = native.get("message") or {}
 
-            except json.JSONDecodeError:
-                continue
+                thinking_piece = message_field.get("thinking") or ""
+                content_piece = message_field.get("content") or ""
+
+                chunk = {
+                    "choices": [
+                        {
+                            "delta": {
+                                "reasoning_content":
+                                    thinking_piece or None,
+                                "content":
+                                    content_piece or None,
+                            },
+                            "finish_reason":
+                                native.get("done_reason")
+                                if native.get("done")
+                                else None,
+                        }
+                    ]
+                }
+
+                if native.get("done"):
+
+                    completed = True
+
+                    eval_count = native.get("eval_count")
+                    eval_ns = native.get("eval_duration") or 0
+                    prompt_count = native.get("prompt_eval_count")
+                    prompt_ns = native.get("prompt_eval_duration") or 0
+
+                    chunk["usage"] = {
+                        "prompt_tokens": prompt_count,
+                        "completion_tokens": eval_count,
+                    }
+
+                    chunk["timings"] = {
+                        "prompt_n": prompt_count,
+                        "predicted_n": eval_count,
+                        "prompt_per_second":
+                            prompt_count / (prompt_ns / 1e9)
+                            if prompt_count and prompt_ns
+                            else None,
+                        "predicted_per_second":
+                            eval_count / (eval_ns / 1e9)
+                            if eval_count and eval_ns
+                            else None,
+                        "predicted_per_token_ms":
+                            eval_ns / 1e6 / eval_count
+                            if eval_count and eval_ns
+                            else None,
+                    }
+
+            else:
+
+                if not line.startswith("data: "):
+                    continue
+
+                data = line[6:]
+
+                if data == "[DONE]":
+                    completed = True
+                    break
+
+                try:
+                    chunk = json.loads(data)
+
+                except json.JSONDecodeError:
+                    continue
 
             if chunk.get("usage"):
                 usage = chunk["usage"]
@@ -783,7 +893,7 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
                 if finish_reason == "length":
                     truncated = True
 
-            delta = choice.get("delta", {})
+            delta = choice.get("delta") or {}
 
             reasoning = delta.get(
                 "reasoning_content"
@@ -1249,6 +1359,10 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
         "power_avg_w": telemetry["power_average_w"],
         "power_peak_w": telemetry["power_peak_w"],
         "estimated_energy_j": energy_joules,
+        "cpu_freq_avg_mhz": telemetry["cpu_freq_average"],
+        "cpu_freq_peak_mhz": telemetry["cpu_freq_peak"],
+        "throttle_flags_peak": telemetry["throttle_flags_peak"],
+        "throttle_occurred": telemetry["throttle_occurred"],
     }
 
     response_record = {
