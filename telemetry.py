@@ -146,30 +146,30 @@ def get_throttle_metrics():
 
 
 def get_power_metrics():
-    """5V input power from the Pi 5 PMIC.
-
-    Summing every rail double counts, because the core and RAM rails are
-    derived from the 5V input. EXT5V_V * EXT5V_A is board input power,
-    the closest analogue to the Mac mini board-power column.
-    """
+    """Sum of PMIC rail power. Excludes USB and 5V-direct loads."""
     output = _vcgencmd("pmic_read_adc")
     if not output:
         return {}
 
-    readings = {}
-    for name, value in re.findall(r"([A-Z0-9_]+_(?:V|A)):\s*([\d.]+)", output):
-        try:
-            readings[name] = float(value)
-        except ValueError:
-            continue
+    amps = {
+        name: float(value)
+        for name, value in re.findall(
+            r"([A-Z0-9_]+)_A current\(\d+\)=([\d.]+)A", output
+        )
+    }
+    volts = {
+        name: float(value)
+        for name, value in re.findall(
+            r"([A-Z0-9_]+)_V volt\(\d+\)=([\d.]+)V", output
+        )
+    }
 
-    volts = readings.get("EXT5V_V")
-    amps = readings.get("EXT5V_A")
+    total = sum(volts[rail] * amps[rail] for rail in amps if rail in volts)
 
-    if volts is None or amps is None:
+    if not total:
         return {}
 
-    return {"power_current_mw": volts * amps * 1000.0}
+    return {"power_current_mw": total * 1000.0}
 
 
 _stop_event = threading.Event()
