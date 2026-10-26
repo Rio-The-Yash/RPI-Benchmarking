@@ -34,8 +34,17 @@ If `./setup.sh` fails or you prefer control, do the steps manually:
 
 ```bash
 sudo apt-get update -qq && sudo apt-get install -y -qq git cmake python3 curl
-python3 -m pip install --user psutil requests
-sudo apt-get install -y vcgencmd    # needed for temperature monitoring
+python3 -m pip install --break-system-packages psutil requests
+# Temperature tool — pick ONE of these:
+#   Option A — legacy location (check first)
+ls /opt/vc/bin/vcgencmd && sudo ln -sf /opt/vc/bin/vcgencmd /usr/local/bin/vcgencmd
+#   Option B — official binary
+#   sudo curl -L -o /usr/local/bin/vcgencmd \
+#       https://raw.githubusercontent.com/raspberrypi/firmware/master/v7l/usr/bin/vcgencmd
+#   sudo chmod +x /usr/local/bin/vcgencmd
+#   Option C — from firmware source tree
+#   git clone --depth 1 https://github.com/raspberrypi/firmware.git /tmp/firmware
+#   cd /tmp/firmware/v7l && make install
 ```
 
 ### 2. Download the model

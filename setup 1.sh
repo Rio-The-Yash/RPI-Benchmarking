@@ -62,7 +62,7 @@ done
 echo
 echo "Installing/checking Python dependencies..."
 
-python3 -m pip install --user psutil requests
+python3 -m pip install --break-system-packages psutil requests
 
 # --------------------------------------------------
 # Create model directory
