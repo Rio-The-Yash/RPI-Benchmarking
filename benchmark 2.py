@@ -9,13 +9,25 @@ from pathlib import Path
 
 import requests
 
-from telemetry import (
-    collect_telemetry, start_power_monitor, stop_power_monitor,
-    start_temperature_monitor, stop_temperature_monitor,
+from telemetry2 import (
+    collect_telemetry, get_rpi_cpu_temp, get_rpi_gpu_temp,
 )
 
 
-SERVER_URL = "http://127.0.0.1:8080/v1/chat/completions"
+_telemetry_active = False
+
+def start_rpi_telemetry():
+    """Raspberry Pi uses in-process telemetry polling — nothing to start."""
+    global _telemetry_active
+    _telemetry_active = True
+
+def stop_rpi_telemetry():
+    """Raspberry Pi uses in-process telemetry polling — stop it."""
+    global _telemetry_active
+    _telemetry_active = False
+
+
+SERVER_URL = "http://127.0.0.1:9090/v1/chat/completions"
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
 # Model information can be supplied by run_benchmark.sh.
@@ -162,12 +174,17 @@ def summarize_telemetry(samples):
     cpu = values("cpu_avg_percent")
     cpu_core = values("cpu_peak_core_percent")
 
+    # Raspberry Pi has no separate GPU utilization metric; skip if absent.
     gpu = values("gpu_percent")
 
     cpu_temp = values("cpu_temp_c")
     gpu_temp = values("gpu_temp_c")
 
-    power = values("power_current_mw")
+    # On Raspberry Pi, power may come as 'estimated_w' (voltage*current/1000)
+    # or 'cpu_clocks'. Normalise into watts.
+    power_vals = values("estimated_w") + values("cpu_clocks_w")
+    if not power_vals:
+        power_vals = values("power_current_mw")
 
     return {
         "samples": len(samples),
@@ -212,12 +229,10 @@ def summarize_telemetry(samples):
             max(gpu_temp) if gpu_temp else None,
 
         "power_average_w":
-            sum(power) / len(power) / 1000
-            if power else None,
+            (sum(power_vals) / len(power_vals)) / 1000 if power_vals else None,
 
         "power_peak_w":
-            max(power) / 1000
-            if power else None,
+            (max(power_vals) / 1000) if power_vals else None,
     }
 
 
@@ -351,7 +366,7 @@ def run_benchmark():
     )
 
     filename = (
-        f"macmini_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        f"rpi5_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         "_all_profiles.csv"
     )
 
@@ -394,8 +409,8 @@ def run_benchmark():
     print(f"Saving raw session dump to: {raw_session_path}")
 
     try:
-        start_temperature_monitor()
-        start_power_monitor()
+        # Raspberry Pi uses in-process polling instead of external sensors
+        start_rpi_telemetry()
 
         with results_path.open(
             "w",
@@ -583,21 +598,21 @@ def run_benchmark():
                 )
                 csv_file.flush()
 
-        stop_power_monitor()
-        stop_temperature_monitor()
+    # Raspberry Pi uses in-process polling instead of external sensors
+    stop_rpi_telemetry()
 
-        print()
-        print("=" * 70)
-        print("BENCHMARK FINISHED")
-        print("=" * 70)
-        print(f"Total attempted runs: {iteration}")
-        print(
-            f"Total prompt response time: "
-            f"{total_prompt_time_s:.3f} sec"
-        )
-        print(f"Results: {results_path}")
-        print(f"Responses: {responses_path}")
-        print(f"Raw session: {raw_session_path}")
+    print()
+    print("=" * 70)
+    print("BENCHMARK FINISHED")
+    print("=" * 70)
+    print(f"Total attempted runs: {iteration}")
+    print(
+        f"Total prompt response time: "
+        f"{total_prompt_time_s:.3f} sec"
+    )
+    print(f"Results: {results_path}")
+    print(f"Responses: {responses_path}")
+    print(f"Raw session: {raw_session_path}")
 
 
 
@@ -921,28 +936,26 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
 
     print(
         "Hardware:                   "
-        "Apple Mac mini M2 Pro"
+        "Raspberry Pi 5 (4GB)"
     )
 
     print(
         "CPU:                        "
-        "Apple M2 Pro 12-core "
-        "(8 performance + 4 efficiency)"
+        "ARM Cortex-A76 4x + Cortex-A53 4x @ 1.6 GHz"
     )
 
     print(
         "Memory:                     "
-        "32 GB unified memory"
+        "4 GB LPDDR4 (unified memory)"
     )
 
     print(
         "Runtime:                    "
-        "llama.cpp + Metal"
+        "llama.cpp (CPU only, no GPU offload)"
     )
 
     print(
-        "GPU acceleration:           "
-        "Apple Metal"
+        "GPU acceleration:           N/A - VideoCore VII GPU not supported by llama.cpp"
     )
 
     print(
@@ -1081,8 +1094,7 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
     )
 
     print(
-        "NPU:                        "
-        "N/A - inference uses Metal GPU"
+        "GPU utilization:            N/A - CPU only, no GPU offload"
     )
 
     print()

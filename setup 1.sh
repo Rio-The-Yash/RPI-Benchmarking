@@ -3,7 +3,7 @@
 set -e
 
 # ============================================================
-# SimpleDirect Mac Mini Setup
+# RPI-Benchmarking Setup for Raspberry Pi
 # ============================================================
 
 BENCHMARK_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -14,7 +14,7 @@ MODEL_FILE="$MODEL_DIR/Vinci-Piccolo-1.0-Q4_K_M.gguf"
 
 echo
 echo "=========================================="
-echo " SimpleDirect Mac Mini Setup"
+echo " RPI-Benchmarking Setup (Raspberry Pi)"
 echo "=========================================="
 echo
 echo "Benchmark directory:"
@@ -22,88 +22,37 @@ echo "$BENCHMARK_DIR"
 echo
 
 # --------------------------------------------------
-# Check macOS / Apple Silicon
+# Check Raspberry Pi OS
 # --------------------------------------------------
 
-if [ "$(uname -s)" != "Darwin" ]; then
-    echo "ERROR: This setup script is intended for macOS."
+if [ "$(uname -s)" != "Linux" ]; then
+    echo "ERROR: This setup script is intended for Linux (Raspberry Pi OS)."
+    exit 1
+fi
+
+if [ "$(uname -m)" != "aarch64" ]; then
+    echo "ERROR: This setup requires aarch64 architecture (Raspberry Pi). Current: $(uname -m)"
     exit 1
 fi
 
 echo "System:"
-echo "  macOS $(sw_vers -productVersion)"
+echo "  Raspberry Pi OS ($(cat /etc/os-release | grep VERSION_ID | head -1 | tr -d '\"'))"
 echo "  Architecture: $(uname -m)"
 echo
 
 # --------------------------------------------------
-# Homebrew
+# Required command-line tools (Debian/apt)
 # --------------------------------------------------
 
-echo "Checking Homebrew..."
-
-if command -v brew >/dev/null 2>&1; then
-    BREW_BIN="$(command -v brew)"
-
-elif [ -x /opt/homebrew/bin/brew ]; then
-    BREW_BIN="/opt/homebrew/bin/brew"
-
-elif [ -x /usr/local/bin/brew ]; then
-    BREW_BIN="/usr/local/bin/brew"
-
-else
-    echo
-    echo "Homebrew not found."
-    echo "Installing Homebrew..."
-    echo
-
-    /bin/bash -c \
-        "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-    if [ -x /opt/homebrew/bin/brew ]; then
-        BREW_BIN="/opt/homebrew/bin/brew"
-
-    elif [ -x /usr/local/bin/brew ]; then
-        BREW_BIN="/usr/local/bin/brew"
-
-    else
-        echo "ERROR: Homebrew installation could not be verified."
-        exit 1
-    fi
-fi
-
-BREW_PREFIX="$("$BREW_BIN" --prefix)"
-export PATH="$BREW_PREFIX/bin:$PATH"
-
-echo "Homebrew found:"
-echo "$BREW_BIN"
-
-# --------------------------------------------------
-# Required command-line tools
-# --------------------------------------------------
-
-echo
 echo "Checking required tools..."
 
-for package in cmake git curl python; do
-
-    case "$package" in
-        python)
-            COMMAND="python3"
-            FORMULA="python"
-            ;;
-        *)
-            COMMAND="$package"
-            FORMULA="$package"
-            ;;
-    esac
-
-    if ! command -v "$COMMAND" >/dev/null 2>&1; then
-        echo "Installing $FORMULA..."
-        "$BREW_BIN" install "$FORMULA"
+for package in git cmake python3 curl; do
+    if ! command -v "$package" >/dev/null 2>&1; then
+        echo "Installing $package..."
+        sudo apt-get update -qq && sudo apt-get install -y -qq "$package"
     else
-        echo "$COMMAND found."
+        echo "$package found."
     fi
-
 done
 
 # --------------------------------------------------
@@ -116,103 +65,13 @@ echo "Installing/checking Python dependencies..."
 python3 -m pip install --user psutil requests
 
 # --------------------------------------------------
-# macmon
-# --------------------------------------------------
-
-echo
-echo "Checking macmon..."
-
-if ! command -v macmon >/dev/null 2>&1; then
-
-    echo "macmon not found."
-    echo "Installing macmon..."
-
-    "$BREW_BIN" install macmon
-
-else
-
-    echo "macmon found."
-
-fi
-
-# Refresh Homebrew PATH after installation.
-export PATH="$("$BREW_BIN" --prefix)/bin:$PATH"
-
-if ! command -v macmon >/dev/null 2>&1; then
-    echo "ERROR: macmon installation could not be verified."
-    exit 1
-fi
-
-# --------------------------------------------------
-# llama.cpp
-# --------------------------------------------------
-
-echo
-echo "Checking llama.cpp..."
-
-if [ ! -d "$LLAMA_DIR/.git" ]; then
-
-    if [ -e "$LLAMA_DIR" ]; then
-        echo "Existing $LLAMA_DIR is not a valid llama.cpp Git repository."
-        echo "Removing incomplete directory..."
-        rm -rf "$LLAMA_DIR"
-    fi
-
-    echo "Cloning llama.cpp..."
-
-    git clone https://github.com/ggerganov/llama.cpp.git "$LLAMA_DIR"
-
-else
-
-    echo "llama.cpp repository already exists."
-
-fi
-
-# --------------------------------------------------
-# Build llama.cpp with Metal
-# --------------------------------------------------
-
-echo
-echo "Checking llama-server build..."
-
-cd "$LLAMA_DIR"
-
-if [ ! -x "$LLAMA_DIR/build/bin/llama-server" ]; then
-
-    echo "llama-server not found."
-    echo "Building llama.cpp with Metal support..."
-    echo
-
-    rm -rf build
-
-    cmake -B build \
-        -DGGML_METAL=ON \
-        -DCMAKE_BUILD_TYPE=Release
-
-    cmake --build build --config Release -j
-
-else
-
-    echo "llama-server already built."
-
-fi
-
-if [ ! -x "$LLAMA_DIR/build/bin/llama-server" ]; then
-    echo "ERROR: llama-server build failed."
-    exit 1
-fi
-
-# --------------------------------------------------
 # Create model directory
 # --------------------------------------------------
 
-echo
-echo "Checking model directory..."
-
 mkdir -p "$MODEL_DIR"
-
 echo "Model directory:"
 echo "$MODEL_DIR"
+echo
 
 # --------------------------------------------------
 # Download Vinci-Piccolo model
@@ -224,7 +83,6 @@ echo "Checking Vinci-Piccolo model..."
 MODEL_VALID=0
 
 if [ -s "$MODEL_FILE" ]; then
-
     MODEL_SIZE="$(wc -c < "$MODEL_FILE" | tr -d ' ')"
     MODEL_HEADER="$(head -c 4 "$MODEL_FILE" 2>/dev/null || true)"
 
@@ -232,22 +90,16 @@ if [ -s "$MODEL_FILE" ]; then
        [ "$MODEL_HEADER" = "GGUF" ]; then
         MODEL_VALID=1
     fi
-
 fi
 
 if [ "$MODEL_VALID" -eq 1 ]; then
-
     echo "Vinci-Piccolo model already exists."
     echo "$MODEL_FILE"
-
 else
-
-    echo "Model not found."
-    echo "Downloading Vinci-Piccolo Q4_K_M..."
+    echo "Model not found. Downloading Vinci-Piccolo Q4_K_M..."
     echo
 
-    # Find the current Q4_K_M GGUF filename directly from
-    # the Hugging Face repository.
+    # Find the current Q4_K_M GGUF filename directly from Hugging Face
     MODEL_URL=$(python3 - <<'PY'
 import json
 from urllib.parse import quote
@@ -280,7 +132,7 @@ print(
     f"{quote(filename, safe='/')}"
 )
 PY
-    )
+)
 
     if [ -z "$MODEL_URL" ]; then
         echo "ERROR: Could not determine model download URL."
@@ -323,7 +175,32 @@ PY
 
     echo
     echo "Model downloaded successfully."
+fi
 
+# --------------------------------------------------
+# Build llama.cpp with KleidiAI for ARM AArch64
+# --------------------------------------------------
+
+echo
+echo "Building llama.cpp for aarch64 CPU..."
+echo
+
+rm -rf "$LLAMA_DIR"
+
+git clone https://github.com/ggerganov/llama.cpp "$LLAMA_DIR"
+
+cd "$LLAMA_DIR"
+
+# Enable KleidiAI CPU microkernels for better performance on ARM Cortex-A76
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DGGML_CPU_KLEIDIAI=ON
+
+cmake --build build --config Release -j$(nproc)
+
+if [ ! -x "$LLAMA_DIR/build/bin/llama-server" ]; then
+    echo "ERROR: llama-server build failed."
+    exit 1
 fi
 
 # --------------------------------------------------
@@ -357,20 +234,11 @@ if ! python3 -c "import psutil, requests" >/dev/null 2>&1; then
     FAILED=1
 fi
 
-if ! command -v macmon >/dev/null 2>&1; then
-    echo "ERROR: macmon missing."
-    FAILED=1
-fi
-
 if [ "$FAILED" -ne 0 ]; then
     echo
     echo "ERROR: Setup verification failed."
     exit 1
 fi
-
-# --------------------------------------------------
-# Setup complete
-# --------------------------------------------------
 
 echo
 echo "=========================================="
@@ -384,4 +252,3 @@ echo "Model:"
 echo "$MODEL_FILE"
 echo
 echo "Setup verification passed."
-echo

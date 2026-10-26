@@ -8,11 +8,10 @@ set -u
 
 LLAMA_DIR="$HOME/llama.cpp"
 BENCHMARK_DIR="$(cd "$(dirname "$0")" && pwd)"
-
 MODEL="$BENCHMARK_DIR/models/Vinci-Piccolo-1.0-Q4_K_M.gguf"
 SETUP_SCRIPT="$BENCHMARK_DIR/setup.sh"
 
-PORT=8080
+PORT=9090
 SERVER_PID=""
 
 # ============================================================
@@ -32,7 +31,7 @@ trap cleanup EXIT INT TERM
 
 echo
 echo "=========================================="
-echo " SimpleDirect Mac Mini Benchmark"
+echo " RPI Benchmark (Raspberry Pi)"
 echo "=========================================="
 echo
 
@@ -71,8 +70,8 @@ else
 
 fi
 
-if ! command -v macmon >/dev/null 2>&1; then
-    echo "  - macmon missing"
+if ! vcgencmd measure_temp >/dev/null 2>&1; then
+    echo "  - Temperature monitoring tool (vcgencmd) missing"
     SETUP_NEEDED=1
 fi
 
@@ -136,13 +135,8 @@ if [ ! -f "$MODEL" ]; then
     exit 1
 fi
 
-if ! python3 -c "import psutil, requests" >/dev/null 2>&1; then
-    echo "ERROR: Required Python packages are missing."
-    exit 1
-fi
-
-if ! command -v macmon >/dev/null 2>&1; then
-    echo "ERROR: macmon is missing."
+if ! command -v vcgencmd >/dev/null 2>&1; then
+    echo "ERROR: vcgencmd is missing (required for temperature monitoring)."
     exit 1
 fi
 
@@ -171,18 +165,13 @@ echo
 # Start timing before llama-server launches so this includes
 # the complete server/model startup period.
 
-START_TIME=$(python3 - <<'PY'
-import time
-print(time.time())
-PY
-)
+START_TIME=$(python3 -c 'import time; print(time.time())')
 
 ./build/bin/llama-server \
     -m "$MODEL" \
-    -ngl 99 \
     --host 127.0.0.1 \
     --port "$PORT" \
-    > "$BENCHMARK_DIR/llama-server-mac.log" 2>&1 &
+    > "$BENCHMARK_DIR/llama-server-rpi.log" 2>&1 &
 
 SERVER_PID=$!
 
@@ -198,7 +187,7 @@ for i in $(seq 1 180); do
         echo "ERROR: llama-server stopped during startup."
         echo
         echo "Last server log lines:"
-        tail -30 "$BENCHMARK_DIR/llama-server-mac.log"
+        tail -30 "$BENCHMARK_DIR/llama-server-rpi.log"
         exit 1
     fi
 
@@ -218,27 +207,13 @@ if [ "$READY" -ne 1 ]; then
     echo "ERROR: Server did not become ready."
     echo
     echo "Last server log lines:"
-    tail -30 "$BENCHMARK_DIR/llama-server-mac.log"
+    tail -30 "$BENCHMARK_DIR/llama-server-rpi.log"
     exit 1
 fi
 
-END_TIME=$(python3 - <<'PY'
-import time
-print(time.time())
-PY
-)
+END_TIME=$(python3 -c 'import time; print(time.time())')
 
-STARTUP_TIME=$(python3 - <<PY
-start = float("$START_TIME")
-end = float("$END_TIME")
-print(f"{end - start:.2f}")
-PY
-)
-
-echo
-echo "Model ready."
-echo "Startup/load time: ${STARTUP_TIME} seconds"
-echo
+STARTUP_TIME=$(( END_TIME - START_TIME ))
 
 # ============================================================
 # Run benchmark
