@@ -15,8 +15,7 @@ from telemetry import (
 )
 
 
-# Backend can be llama.cpp (default, port 8080) or Ollama (port 11434).
-# run_benchmark.sh / run_ollama_benchmark.sh set these.
+# Backend is llama.cpp (default, port 8080) or Ollama (port 11434).
 BACKEND = os.environ.get("BENCHMARK_BACKEND", "llamacpp").lower()
 
 DEFAULT_URLS = {
@@ -36,7 +35,7 @@ MODEL_NAME = os.environ.get("BENCHMARK_MODEL_NAME", "Vinci-Piccolo-1.0-GGUF")
 MODEL_REPO = os.environ.get("BENCHMARK_MODEL_REPO", "simpledirect/Vinci-Piccolo-1.0-GGUF")
 QUANTIZATION = os.environ.get("BENCHMARK_QUANTIZATION", "Q4_K_M")
 MODEL_STARTUP_TIME = os.environ.get("MODEL_STARTUP_TIME")
-MAX_TOKENS = 4096
+MAX_TOKENS = 1024
 
 # Keep the original prompt first in each profile for comparison with older runs.
 EXTRA_PROMPTS = {
@@ -651,7 +650,7 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
 
         "max_tokens": MAX_TOKENS,
 
-        # Ask llama.cpp to provide usage at the end.
+        # Ask the server to include token usage in the final chunk.
         "stream_options": {
             "include_usage": True
         },
@@ -661,28 +660,39 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
 
         "top_p":
             profile["top_p"],
-
-        "top_k":
-            profile["top_k"],
-
-        "min_p":
-            profile["min_p"],
-
-        "presence_penalty":
-            profile["presence_penalty"],
-
-        "repeat_penalty":
-            profile["repeat_penalty"],
-
-        # Tell the model whether thinking is enabled.
-        "chat_template_kwargs": {
-            "enable_thinking":
-                profile["thinking"]
-        },
-
-        # Separate reasoning from final answer.
-        "reasoning_format": "deepseek"
     }
+
+    if BACKEND == "llamacpp":
+
+        payload.update({
+            "top_k":
+                profile["top_k"],
+
+            "min_p":
+                profile["min_p"],
+
+            "presence_penalty":
+                profile["presence_penalty"],
+
+            "repeat_penalty":
+                profile["repeat_penalty"],
+
+            # llama.cpp-only: thinking toggle and reasoning/answer split.
+            "chat_template_kwargs": {
+                "enable_thinking":
+                    profile["thinking"]
+            },
+
+            "reasoning_format": "deepseek"
+        })
+
+    else:
+
+        # Ollama's OpenAI-compatible endpoint requires the model name in
+        # every request body and rejects llama.cpp-only sampler fields.
+        payload["model"] = MODEL_NAME
+
+        payload["presence_penalty"] = profile["presence_penalty"]
 
     print()
     print("Running benchmark...")
