@@ -1,8 +1,9 @@
-models/
-__pycache__/
-*.gguf
 *.log
 *.tar.gz
 *.b64
-*_raw_session.txt
-*_responses.json
+__pycache__/
+.venv/
+models/
+archive-pre-fix/
+results-1024-partial/
+patch_thinking*.py

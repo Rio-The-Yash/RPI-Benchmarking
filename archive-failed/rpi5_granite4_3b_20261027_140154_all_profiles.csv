@@ -1,0 +1,95 @@
+timestamp_utc,model,model_repo,quantization,model_startup_time_s,iteration,prompt_id,profile,thinking,prompt,status,completed,truncated,error,ttft_ms,tpot_ms,observed_inter_chunk_ms,prompt_tokens,output_tokens,prompt_tps,output_tps,total_request_time_s,telemetry_samples,ram_start_mb,ram_avg_mb,ram_peak_mb,swap_peak_mb,cpu_avg_percent,cpu_peak_avg_percent,cpu_peak_core_percent,gpu_avg_percent,gpu_peak_percent,cpu_temp_start_c,cpu_temp_peak_c,gpu_temp_start_c,gpu_temp_peak_c,power_avg_w,power_peak_w,estimated_energy_j,cpu_freq_avg_mhz,cpu_freq_peak_mhz,throttle_flags_peak,throttle_occurred
+2026-10-27T18:03:37.162695+00:00,granite4:3b,ollama/granite4:3b,unknown,,1,1,Thinking - General,True,"A country currently generates 70 percent of its
+electricity from coal and natural gas and wants to
+reach 90 percent renewable electricity within 15 years.
+Develop a detailed transition strategy. Compare solar,
+wind, hydroelectric, geothermal, nuclear, battery
+storage, pumped hydro, and demand-response
+technologies. Analyze technical feasibility, grid
+stability, transmission requirements, seasonal energy
+storage, land use, supply-chain constraints, workforce
+requirements, capital costs, operating costs, energy
+security, and environmental impacts. Identify the major
+trade-offs and failure modes. Then propose a phased
+15-year implementation plan with measurable milestones.
+Explain the reasoning behind your recommendations in
+detail.",truncated,True,True,,3943.499,187.949,188.316,158,512,40.132,5.321,100.173,102,4194.797,4075.586,4194.797,0.000,97.837,100.000,100.000,,,55.400,73.600,,,9.001,12.174,901.669,2800.031,2800.044,917504,True
+2026-10-27T18:05:21.249837+00:00,granite4:3b,ollama/granite4:3b,unknown,,2,2,Thinking - General,True,"Design a comprehensive strategy for a rapidly growing
+city of five million people that expects its population
+to increase by 40 percent over the next twenty years.
+The city already faces traffic congestion, housing
+shortages, aging water systems, electricity demand
+growth, air pollution, and limited public funds.
+Develop an integrated plan covering transportation,
+housing, water, electricity, waste management, public
+health, climate resilience, and digital infrastructure.
+For each area, analyze competing priorities,
+dependencies, risks, costs, and possible unintended
+consequences. Explain how the city should sequence
+investments over twenty years and how success should be
+measured.",truncated,True,True,,3613.401,193.889,194.267,147,512,40.979,5.158,102.885,104,4050.188,4101.784,4110.484,0.000,97.872,100.000,100.000,,,73.600,77.400,,,9.193,13.660,945.776,2799.129,2800.044,917504,True
+2026-10-27T18:07:04.521272+00:00,granite4:3b,ollama/granite4:3b,unknown,,3,3,Thinking - General,True,"A manufacturing company operates twelve factories
+across multiple countries and wants to reduce its total
+carbon emissions by 80 percent while keeping production
+costs competitive. Build a detailed decision framework
+for achieving this target. Consider renewable
+electricity, electrification of industrial processes,
+energy efficiency, alternative fuels, supply-chain
+changes, transportation, carbon capture, equipment
+replacement cycles, and carbon offsets. Discuss
+financial, technical, regulatory, operational, and
+supply-chain risks. Compare short-term and long-term
+strategies and propose a prioritized implementation
+roadmap with clear reasoning.",truncated,True,True,,3258.811,192.991,193.363,132,512,40.859,5.182,102.069,104,4100.672,4154.702,4173.703,0.000,97.872,100.000,100.000,,,71.900,75.700,,,9.079,13.312,926.651,2800.032,2800.044,917512,True
+2026-10-27T18:08:47.725419+00:00,granite4:3b,ollama/granite4:3b,unknown,,4,4,Thinking - General,True,"Imagine that a region experiences a severe five-year
+drought while its population and agricultural demand
+continue to grow. Develop a detailed water-security
+strategy that balances urban consumption, agriculture,
+industry, ecosystem protection, and future population
+growth. Evaluate desalination, wastewater recycling,
+groundwater extraction, reservoirs, conservation, smart
+metering, agricultural efficiency, water pricing, and
+inter-regional transfers. Analyze economic,
+environmental, technical, political, and social
+trade-offs. Construct a phased response for immediate
+emergency measures, medium-term stabilization, and
+long-term resilience.",truncated,True,True,,3317.527,192.745,193.111,138,512,41.979,5.188,101.999,104,4150.875,4202.530,4209.516,0.000,97.868,100.000,100.000,,,72.500,76.800,,,9.163,13.653,934.616,2799.657,2800.044,917504,True
+2026-10-27T18:10:31.304898+00:00,granite4:3b,ollama/granite4:3b,unknown,,5,5,Thinking - General,True,"A national government wants to build a resilient
+digital infrastructure strategy for the next fifteen
+years. It must support cloud computing, artificial
+intelligence, healthcare, banking, government services,
+education, and emergency communications while remaining
+resilient to cyberattacks, natural disasters,
+supply-chain disruptions, and power failures. Develop a
+detailed architecture and policy strategy. Compare
+centralized and distributed infrastructure, public
+cloud, sovereign cloud, edge computing, local data
+centers, backup power, network redundancy,
+cybersecurity controls, and disaster recovery. Identify
+trade-offs and propose measurable resilience targets.",truncated,True,True,,3274.721,193.553,193.931,135,512,41.545,5.167,102.375,104,4202.625,4256.739,4265.094,0.000,97.865,100.000,100.000,,,71.900,77.400,,,9.092,13.374,930.815,2798.225,2800.044,917512,True
+2026-10-27T18:12:14.602132+00:00,granite4:3b,ollama/granite4:3b,unknown,,6,6,Thinking - General,True,"Analyze how a country should prepare its economy and
+workforce for widespread adoption of artificial
+intelligence and automation over the next twenty years.
+Consider productivity, job displacement, creation of
+new occupations, education, reskilling, inequality,
+taxation, social programs, small businesses, research
+investment, cybersecurity, energy demand, and
+international competitiveness. Present multiple
+plausible future scenarios rather than assuming a
+single outcome. For each scenario, identify major
+risks, leading indicators, and policy responses. Finish
+with a staged strategy that can adapt as conditions
+change.",truncated,True,True,,3246.233,193.061,193.438,133,512,41.299,5.180,102.094,104,4259.672,4307.735,4318.578,0.000,97.849,100.000,100.000,,,73.000,78.500,,,9.162,13.505,935.380,2798.224,2800.044,917512,True
+2026-10-27T18:13:57.994978+00:00,granite4:3b,ollama/granite4:3b,unknown,,7,1,Thinking - Precise Coding,True,"Design and implement in TypeScript an O(n) algorithm
+that accepts an unsorted array of integers and returns:
+the length of the longest consecutive sequence, the
+sequence itself, and the starting and ending values.
+Duplicate values may appear and must not affect the
+result. If multiple sequences have the same maximum
+length, return the one with the smallest starting
+value. Do not sort the input. Explain the algorithm,
+prove why its expected time complexity is O(n), analyze
+space complexity, discuss edge cases, and provide clean
+production-quality TypeScript code followed by at least
+eight meaningful test cases.",truncated,True,True,,3550.127,192.655,193.032,143,512,40.571,5.191,102.190,104,4307.453,4357.910,4372.594,0.000,97.877,100.000,100.000,,,74.100,77.900,,,9.144,13.313,934.379,2799.658,2800.044,917512,True
+,,,,,,,TOTAL PROMPT TIME,,,,,,,,,,,,,,713.785,,,,,,,,,,,,,,,,,,,,,

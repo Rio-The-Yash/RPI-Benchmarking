@@ -1,0 +1,56 @@
+timestamp_utc,model,model_repo,quantization,model_startup_time_s,iteration,prompt_id,profile,thinking,prompt,status,completed,truncated,error,ttft_ms,tpot_ms,observed_inter_chunk_ms,prompt_tokens,output_tokens,prompt_tps,output_tps,total_request_time_s,telemetry_samples,ram_start_mb,ram_avg_mb,ram_peak_mb,swap_peak_mb,cpu_avg_percent,cpu_peak_avg_percent,cpu_peak_core_percent,gpu_avg_percent,gpu_peak_percent,cpu_temp_start_c,cpu_temp_peak_c,gpu_temp_start_c,gpu_temp_peak_c,power_avg_w,power_peak_w,estimated_energy_j,cpu_freq_avg_mhz,cpu_freq_peak_mhz,throttle_flags_peak,throttle_occurred
+2026-10-27T13:50:44.222503+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,1,1,Thinking - General,True,"A country currently generates 70 percent of its
+electricity from coal and natural gas and wants to
+reach 90 percent renewable electricity within 15 years.
+Develop a detailed transition strategy. Compare solar,
+wind, hydroelectric, geothermal, nuclear, battery
+storage, pumped hydro, and demand-response
+technologies. Analyze technical feasibility, grid
+stability, transmission requirements, seasonal energy
+storage, land use, supply-chain constraints, workforce
+requirements, capital costs, operating costs, energy
+security, and environmental impacts. Identify the major
+trade-offs and failure modes. Then propose a phased
+15-year implementation plan with measurable milestones.
+Explain the reasoning behind your recommendations in
+detail.",truncated,True,True,,3470.376,178.263,178.611,153,512,44.148,5.610,94.742,96,7031.078,7029.807,7045.969,0.000,97.673,100.000,100.000,,,51.600,73.600,,,9.177,13.039,869.494,2800.032,2800.044,524288,True
+2026-10-27T13:52:21.430531+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,2,2,Thinking - General,True,"Design a comprehensive strategy for a rapidly growing
+city of five million people that expects its population
+to increase by 40 percent over the next twenty years.
+The city already faces traffic congestion, housing
+shortages, aging water systems, electricity demand
+growth, air pollution, and limited public funds.
+Develop an integrated plan covering transportation,
+housing, water, electricity, waste management, public
+health, climate resilience, and digital infrastructure.
+For each area, analyze competing priorities,
+dependencies, risks, costs, and possible unintended
+consequences. Explain how the city should sequence
+investments over twenty years and how success should be
+measured.",truncated,True,True,,3212.691,181.231,181.585,142,512,44.654,5.518,96.004,98,7028.781,7104.280,7153.469,0.000,97.739,100.000,100.000,,,72.500,77.900,,,9.267,13.332,889.652,2800.033,2800.044,524296,True
+2026-10-27T13:53:57.778429+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,3,3,Thinking - General,True,"A manufacturing company operates twelve factories
+across multiple countries and wants to reduce its total
+carbon emissions by 80 percent while keeping production
+costs competitive. Build a detailed decision framework
+for achieving this target. Consider renewable
+electricity, electrification of industrial processes,
+energy efficiency, alternative fuels, supply-chain
+changes, transportation, carbon capture, equipment
+replacement cycles, and carbon offsets. Discuss
+financial, technical, regulatory, operational, and
+supply-chain risks. Compare short-term and long-term
+strategies and propose a prioritized implementation
+roadmap with clear reasoning.",truncated,True,True,,2882.441,180.210,180.554,127,512,44.610,5.549,95.146,97,7098.719,7175.601,7216.203,0.000,97.711,100.000,100.000,,,71.900,77.400,,,9.273,13.350,882.287,2799.630,2800.044,524288,True
+2026-10-27T13:55:34.330038+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,4,4,Thinking - General,True,"Imagine that a region experiences a severe five-year
+drought while its population and agricultural demand
+continue to grow. Develop a detailed water-security
+strategy that balances urban consumption, agriculture,
+industry, ecosystem protection, and future population
+growth. Evaluate desalination, wastewater recycling,
+groundwater extraction, reservoirs, conservation, smart
+metering, agricultural efficiency, water pricing, and
+inter-regional transfers. Analyze economic,
+environmental, technical, political, and social
+trade-offs. Construct a phased response for immediate
+emergency measures, medium-term stabilization, and
+long-term resilience.",truncated,True,True,,2943.337,180.489,180.834,133,512,45.733,5.540,95.350,97,7170.719,7242.676,7255.734,0.000,97.677,100.000,100.000,,,71.900,76.800,,,9.187,13.288,875.948,2800.033,2800.044,524288,True

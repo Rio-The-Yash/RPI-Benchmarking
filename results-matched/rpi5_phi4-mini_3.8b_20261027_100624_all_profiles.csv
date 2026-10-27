@@ -1,0 +1,43 @@
+timestamp_utc,model,model_repo,quantization,model_startup_time_s,iteration,prompt_id,profile,thinking,prompt,status,completed,truncated,error,ttft_ms,tpot_ms,observed_inter_chunk_ms,prompt_tokens,output_tokens,prompt_tps,output_tps,total_request_time_s,telemetry_samples,ram_start_mb,ram_avg_mb,ram_peak_mb,swap_peak_mb,cpu_avg_percent,cpu_peak_avg_percent,cpu_peak_core_percent,gpu_avg_percent,gpu_peak_percent,cpu_temp_start_c,cpu_temp_peak_c,gpu_temp_start_c,gpu_temp_peak_c,power_avg_w,power_peak_w,estimated_energy_j,cpu_freq_avg_mhz,cpu_freq_peak_mhz,throttle_flags_peak,throttle_occurred
+2026-10-27T14:08:34.966833+00:00,phi4-mini:3.8b,ollama/phi4-mini:3.8b,unknown,,1,1,Thinking - General,True,"A country currently generates 70 percent of its
+electricity from coal and natural gas and wants to
+reach 90 percent renewable electricity within 15 years.
+Develop a detailed transition strategy. Compare solar,
+wind, hydroelectric, geothermal, nuclear, battery
+storage, pumped hydro, and demand-response
+technologies. Analyze technical feasibility, grid
+stability, transmission requirements, seasonal energy
+storage, land use, supply-chain constraints, workforce
+requirements, capital costs, operating costs, energy
+security, and environmental impacts. Identify the major
+trade-offs and failure modes. Then propose a phased
+15-year implementation plan with measurable milestones.
+Explain the reasoning behind your recommendations in
+detail.",truncated,True,True,,4493.104,239.815,240.283,129,512,28.757,4.170,127.279,129,11494.500,11498.179,11543.016,0.000,98.282,100.000,100.000,,,62.600,75.700,,,9.219,11.896,1173.436,2800.032,2800.044,524288,True
+2026-10-27T14:10:24.659997+00:00,phi4-mini:3.8b,ollama/phi4-mini:3.8b,unknown,,2,2,Thinking - General,True,"Design a comprehensive strategy for a rapidly growing
+city of five million people that expects its population
+to increase by 40 percent over the next twenty years.
+The city already faces traffic congestion, housing
+shortages, aging water systems, electricity demand
+growth, air pollution, and limited public funds.
+Develop an integrated plan covering transportation,
+housing, water, electricity, waste management, public
+health, climate resilience, and digital infrastructure.
+For each area, analyze competing priorities,
+dependencies, risks, costs, and possible unintended
+consequences. Explain how the city should sequence
+investments over twenty years and how success should be
+measured.",success,True,False,,4504.543,237.418,237.932,120,438,26.900,4.212,108.490,110,11495.031,11581.193,11612.422,0.000,97.970,100.000,100.000,,,73.000,77.400,,,9.432,12.949,1023.236,2800.033,2800.044,524288,True
+2026-10-27T14:12:32.167829+00:00,phi4-mini:3.8b,ollama/phi4-mini:3.8b,unknown,,3,3,Thinking - General,True,"A manufacturing company operates twelve factories
+across multiple countries and wants to reduce its total
+carbon emissions by 80 percent while keeping production
+costs competitive. Build a detailed decision framework
+for achieving this target. Consider renewable
+electricity, electrification of industrial processes,
+energy efficiency, alternative fuels, supply-chain
+changes, transportation, carbon capture, equipment
+replacement cycles, and carbon offsets. Discuss
+financial, technical, regulatory, operational, and
+supply-chain risks. Compare short-term and long-term
+strategies and propose a prioritized implementation
+roadmap with clear reasoning.",truncated,True,True,,3912.574,239.056,239.514,104,512,26.852,4.183,126.306,128,11576.578,11647.807,11686.250,0.000,98.258,100.000,100.000,,,72.500,76.800,,,9.180,11.828,1159.429,2800.033,2800.044,524288,True
