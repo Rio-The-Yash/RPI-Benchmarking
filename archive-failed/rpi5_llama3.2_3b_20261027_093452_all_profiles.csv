@@ -1,0 +1,193 @@
+timestamp_utc,model,model_repo,quantization,model_startup_time_s,iteration,prompt_id,profile,thinking,prompt,status,completed,truncated,error,ttft_ms,tpot_ms,observed_inter_chunk_ms,prompt_tokens,output_tokens,prompt_tps,output_tps,total_request_time_s,telemetry_samples,ram_start_mb,ram_avg_mb,ram_peak_mb,swap_peak_mb,cpu_avg_percent,cpu_peak_avg_percent,cpu_peak_core_percent,gpu_avg_percent,gpu_peak_percent,cpu_temp_start_c,cpu_temp_peak_c,gpu_temp_start_c,gpu_temp_peak_c,power_avg_w,power_peak_w,estimated_energy_j,cpu_freq_avg_mhz,cpu_freq_peak_mhz,throttle_flags_peak,throttle_occurred
+2026-10-27T13:34:55.660004+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,1,1,Thinking - General,True,"A country currently generates 70 percent of its
+electricity from coal and natural gas and wants to
+reach 90 percent renewable electricity within 15 years.
+Develop a detailed transition strategy. Compare solar,
+wind, hydroelectric, geothermal, nuclear, battery
+storage, pumped hydro, and demand-response
+technologies. Analyze technical feasibility, grid
+stability, transmission requirements, seasonal energy
+storage, land use, supply-chain constraints, workforce
+requirements, capital costs, operating costs, energy
+security, and environmental impacts. Identify the major
+trade-offs and failure modes. Then propose a phased
+15-year implementation plan with measurable milestones.
+Explain the reasoning behind your recommendations in
+detail.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.004,2,4379.328,4378.102,4379.328,0.000,0.125,0.250,1.000,,,51.600,52.100,,,2.782,2.806,0.011,2800.024,2800.027,0,False
+2026-10-27T13:34:56.863585+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,2,2,Thinking - General,True,"Design a comprehensive strategy for a rapidly growing
+city of five million people that expects its population
+to increase by 40 percent over the next twenty years.
+The city already faces traffic congestion, housing
+shortages, aging water systems, electricity demand
+growth, air pollution, and limited public funds.
+Develop an integrated plan covering transportation,
+housing, water, electricity, waste management, public
+health, climate resilience, and digital infrastructure.
+For each area, analyze competing priorities,
+dependencies, risks, costs, and possible unintended
+consequences. Explain how the city should sequence
+investments over twenty years and how success should be
+measured.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4376.875,4373.375,4376.875,0.000,0.000,0.000,0.000,,,52.100,52.100,,,2.743,2.759,0.006,2800.034,2800.040,0,False
+2026-10-27T13:34:58.066508+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,3,3,Thinking - General,True,"A manufacturing company operates twelve factories
+across multiple countries and wants to reduce its total
+carbon emissions by 80 percent while keeping production
+costs competitive. Build a detailed decision framework
+for achieving this target. Consider renewable
+electricity, electrification of industrial processes,
+energy efficiency, alternative fuels, supply-chain
+changes, transportation, carbon capture, equipment
+replacement cycles, and carbon offsets. Discuss
+financial, technical, regulatory, operational, and
+supply-chain risks. Compare short-term and long-term
+strategies and propose a prioritized implementation
+roadmap with clear reasoning.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4369.875,4367.352,4369.875,0.000,0.125,0.250,1.000,,,50.500,50.500,,,2.752,2.776,0.005,2800.037,2800.040,0,False
+2026-10-27T13:34:59.269852+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,4,4,Thinking - General,True,"Imagine that a region experiences a severe five-year
+drought while its population and agricultural demand
+continue to grow. Develop a detailed water-security
+strategy that balances urban consumption, agriculture,
+industry, ecosystem protection, and future population
+growth. Evaluate desalination, wastewater recycling,
+groundwater extraction, reservoirs, conservation, smart
+metering, agricultural efficiency, water pricing, and
+inter-regional transfers. Analyze economic,
+environmental, technical, political, and social
+trade-offs. Construct a phased response for immediate
+emergency measures, medium-term stabilization, and
+long-term resilience.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4364.828,4361.555,4364.828,0.000,0.250,0.500,1.000,,,50.500,50.500,,,2.776,2.776,0.005,2800.031,2800.034,0,False
+2026-10-27T13:35:00.472835+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,5,5,Thinking - General,True,"A national government wants to build a resilient
+digital infrastructure strategy for the next fifteen
+years. It must support cloud computing, artificial
+intelligence, healthcare, banking, government services,
+education, and emergency communications while remaining
+resilient to cyberattacks, natural disasters,
+supply-chain disruptions, and power failures. Develop a
+detailed architecture and policy strategy. Compare
+centralized and distributed infrastructure, public
+cloud, sovereign cloud, edge computing, local data
+centers, backup power, network redundancy,
+cybersecurity controls, and disaster recovery. Identify
+trade-offs and propose measurable resilience targets.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4349.750,4341.578,4349.750,0.000,0.125,0.250,1.000,,,49.900,49.900,,,2.717,2.736,0.005,2800.029,2800.030,0,False
+2026-10-27T13:35:01.675763+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,6,6,Thinking - General,True,"Analyze how a country should prepare its economy and
+workforce for widespread adoption of artificial
+intelligence and automation over the next twenty years.
+Consider productivity, job displacement, creation of
+new occupations, education, reskilling, inequality,
+taxation, social programs, small businesses, research
+investment, cybersecurity, energy demand, and
+international competitiveness. Present multiple
+plausible future scenarios rather than assuming a
+single outcome. For each scenario, identify major
+risks, leading indicators, and policy responses. Finish
+with a staged strategy that can adapt as conditions
+change.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4330.469,4324.219,4330.469,0.000,0.000,0.000,0.000,,,49.900,49.900,,,2.718,2.737,0.004,2800.030,2800.030,0,False
+2026-10-27T13:35:02.878742+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,7,1,Thinking - Precise Coding,True,"Design and implement in TypeScript an O(n) algorithm
+that accepts an unsorted array of integers and returns:
+the length of the longest consecutive sequence, the
+sequence itself, and the starting and ending values.
+Duplicate values may appear and must not affect the
+result. If multiple sequences have the same maximum
+length, return the one with the smallest starting
+value. Do not sort the input. Explain the algorithm,
+prove why its expected time complexity is O(n), analyze
+space complexity, discuss edge cases, and provide clean
+production-quality TypeScript code followed by at least
+eight meaningful test cases.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4317.969,4311.656,4317.969,0.000,0.125,0.250,1.000,,,49.400,49.900,,,2.729,2.737,0.004,2800.035,2800.040,0,False
+2026-10-27T13:35:04.081798+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,8,2,Thinking - Precise Coding,True,"Design a production-quality TypeScript implementation
+of an LRU cache with O(1) average-time get and put
+operations. Do not use JavaScript Map insertion order
+as the eviction mechanism. Implement the required
+hash-map and doubly-linked-list logic explicitly.
+Support updating existing keys, capacity one, arbitrary
+string keys, and generic values. Explain every major
+design decision, identify invariants that must remain
+true, analyze time and space complexity, discuss common
+implementation bugs, and provide a comprehensive test
+suite covering eviction, updates, repeated access, and
+edge cases.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4305.344,4300.594,4305.344,0.000,0.250,0.500,1.000,,,49.900,49.900,,,2.724,2.728,0.005,2800.037,2800.040,0,False
+2026-10-27T13:35:05.285302+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,9,3,Thinking - Precise Coding,True,"You are designing a task scheduler in TypeScript. Each
+task has an ID, execution duration, and zero or more
+dependency IDs. Design an algorithm that validates the
+dependency graph, detects cycles, produces a valid
+execution order when possible, and calculates the
+earliest possible completion time assuming an unlimited
+number of workers and that a task can start only after
+all dependencies finish. Explain the graph
+representation, cycle-detection method, topological
+ordering, dynamic-programming step, complexity, and
+failure cases. Then provide complete TypeScript code
+and a set of nontrivial tests.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4295.375,4285.195,4295.375,0.000,0.000,0.000,0.000,,,49.900,49.900,,,2.720,2.728,0.005,2800.034,2800.034,0,False
+2026-10-27T13:35:06.488438+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,10,4,Thinking - Precise Coding,True,"Design a thread-safe job-processing architecture for a
+service that receives up to 50,000 jobs per minute.
+Jobs may be retried, workers may crash, duplicate
+messages may be delivered, and jobs must never be
+considered successfully completed more than once from
+the application's perspective. Explain how you would
+implement idempotency, retries with exponential
+backoff, dead-letter handling, leases or visibility
+timeouts, concurrency control, database transactions,
+observability, graceful shutdown, and recovery after
+failure. Then provide detailed TypeScript pseudocode or
+implementation-level code for the core worker loop and
+explain race conditions that must be prevented.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4258.000,4252.227,4258.000,0.000,0.125,0.250,1.000,,,49.900,49.900,,,2.702,2.712,0.005,2800.031,2800.034,0,False
+2026-10-27T13:35:07.691472+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,11,5,Thinking - Precise Coding,True,"Implement in TypeScript a function that receives
+millions of time intervals represented as start and end
+integer timestamps and returns the merged
+non-overlapping intervals, total covered duration,
+largest uncovered gap between the minimum and maximum
+timestamps, and maximum number of simultaneously active
+intervals. Clearly define how touching intervals and
+zero-length intervals are handled. Develop an efficient
+algorithm, analyze its time and space complexity,
+explain alternative approaches for very large datasets
+that do not fit into memory, and provide
+production-quality code with extensive edge-case tests.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4245.906,4244.055,4245.906,0.000,1.000,2.000,4.000,,,49.400,49.900,,,2.705,2.717,0.004,2800.034,2800.040,0,False
+2026-10-27T13:35:08.894524+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,12,6,Thinking - Precise Coding,True,"A Node.js API has gradually become slow under load.
+Requests perform authentication, query PostgreSQL, call
+two external services, transform large JSON objects,
+and publish an event. At 50 requests per second latency
+is 120 ms, but at 500 requests per second p95 latency
+exceeds 8 seconds and memory continually increases.
+Develop a systematic debugging and optimization plan.
+Reason about event-loop blocking, connection pools,
+unbounded concurrency, memory leaks, garbage
+collection, database indexes, N+1 queries, HTTP
+connection reuse, timeouts, retries, queues, caching,
+backpressure, and instrumentation. Include concrete
+TypeScript/Node.js examples showing how you would
+restructure the most likely bottlenecks.",error,False,False,"HTTP 400: {""error"":""\""llama3.2:3b\"" does not support thinking""}",,,,,,,,0.002,2,4244.406,4241.570,4244.406,0.000,0.000,0.000,0.000,,,48.300,49.900,,,2.709,2.719,0.004,2800.040,2800.044,0,False
+2026-10-27T13:36:43.031258+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,13,1,Instruct - General,False,"Write a detailed educational guide explaining how
+modern electrical power grids work for a reader with no
+engineering background. Cover electricity generation,
+transformers, high-voltage transmission, substations,
+distribution networks, frequency and voltage control,
+supply-demand balancing, grid operators,
+renewable-energy integration, battery storage,
+blackouts, and grid restoration. Organize the answer
+with clear headings, use practical examples and
+analogies, define technical terms when first
+introduced, and finish with a concise summary of the
+entire electricity journey from power plant to
+household.",truncated,True,True,,2858.181,175.931,176.275,127,512,44.498,5.684,92.935,95,4238.734,4153.190,4238.734,0.000,97.684,100.000,100.000,,,49.900,72.500,,,9.174,13.125,852.599,2800.033,2800.044,0,False
+2026-10-27T13:38:19.082707+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,14,2,Instruct - General,False,"Create a comprehensive beginner-friendly explanation of
+how a web application works from the moment a user
+enters a URL until the requested page appears. Explain
+DNS, IP addresses, TCP, TLS, HTTP, browsers, CDNs, load
+balancers, reverse proxies, web servers, APIs,
+application servers, databases, caches, cookies,
+authentication, JavaScript execution, rendering, and
+browser storage. Follow the request chronologically and
+clearly explain which component is responsible for each
+stage. Include a realistic example involving a user
+signing into an online store.",truncated,True,True,,2853.417,179.677,180.019,129,512,45.773,5.566,94.845,96,4132.312,4206.205,4247.156,0.000,97.667,100.000,100.000,,,71.900,75.700,,,9.208,13.372,873.348,2800.032,2800.044,0,False
+2026-10-27T13:39:55.107910+00:00,llama3.2:3b,ollama/llama3.2:3b,unknown,,15,3,Instruct - General,False,"Write a structured technical guide comparing relational
+databases and document databases. Explain schemas,
+tables, documents, relationships, normalization,
+denormalization, indexes, transactions, ACID
+properties, consistency, horizontal and vertical
+scaling, replication, sharding, query patterns, data
+integrity, and operational complexity. Use PostgreSQL
+and MongoDB as concrete examples without presenting
+either as universally superior. Include several
+application scenarios and explain which characteristics
+should influence the database choice in each scenario.",truncated,True,True,,2451.312,180.413,180.765,113,512,46.680,5.543,94.823,96,4197.281,4273.433,4329.172,0.000,97.687,100.000,100.000,,,73.600,77.400,,,9.300,13.477,881.874,2799.626,2800.044,524296,True
+,,,,,,,TOTAL PROMPT TIME,,,,,,,,,,,,,,282.626,,,,,,,,,,,,,,,,,,,,,

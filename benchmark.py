@@ -35,12 +35,36 @@ if BACKEND == "ollama" and SERVER_URL.endswith("/v1/chat/completions"):
 
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
+
 # Model information can be supplied by run_benchmark.sh.
 MODEL_NAME = os.environ.get("BENCHMARK_MODEL_NAME", "Vinci-Piccolo-1.0-GGUF")
 MODEL_REPO = os.environ.get("BENCHMARK_MODEL_REPO", "simpledirect/Vinci-Piccolo-1.0-GGUF")
 QUANTIZATION = os.environ.get("BENCHMARK_QUANTIZATION", "Q4_K_M")
 MODEL_STARTUP_TIME = os.environ.get("MODEL_STARTUP_TIME")
 MAX_TOKENS = 512
+
+def detect_thinking_support():
+    # Ollama reports model capabilities; only some models can think.
+    base = SERVER_URL.split("/api/")[0]
+
+    try:
+        response = requests.post(
+            base + "/api/show",
+            json={"model": MODEL_NAME},
+            timeout=30,
+        )
+        response.raise_for_status()
+        capabilities = response.json().get("capabilities") or []
+    except Exception:
+        return False
+
+    return "thinking" in capabilities
+
+
+if BACKEND == "ollama":
+    THINKING_SUPPORTED = detect_thinking_support()
+else:
+    THINKING_SUPPORTED = True
 
 # Keep the original prompt first in each profile for comparison with older runs.
 EXTRA_PROMPTS = {
@@ -743,6 +767,11 @@ def run_one_prompt(profile, prompt, prompt_id, iteration):
     print()
     print("Running benchmark...")
     print()
+
+    # Non-thinking models reject the 'think' field with HTTP 400, so drop
+    # it when the model does not advertise thinking capability.
+    if BACKEND == "ollama" and not THINKING_SUPPORTED:
+        payload.pop("think", None)
 
     request_start = time.perf_counter()
 
